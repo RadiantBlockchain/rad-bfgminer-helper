@@ -7,7 +7,7 @@ var randomBytes = crypto.randomBytes(16); // 128 bits is enough
 var mnemonic = bip39.entropyToMnemonic(randomBytes.toString('hex'));
 
 bip39.validateMnemonic(mnemonic);
-console.log('mnemonic random every time (NOT USED): ', mnemonic);
+console.log('Mnemonic random every time (NOT USED): ', mnemonic);
 
 const jsonFileReader = async (filePath) => {
   return new Promise((resolve, reject) => {
