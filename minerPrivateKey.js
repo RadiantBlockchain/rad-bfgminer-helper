@@ -7,7 +7,6 @@ var randomBytes = crypto.randomBytes(16); // 128 bits is enough
 var mnemonic = bip39.entropyToMnemonic(randomBytes.toString('hex'));
 
 bip39.validateMnemonic(mnemonic);
-console.log('Mnemonic random every time (NOT USED): ', mnemonic);
 
 const jsonFileReader = async (filePath) => {
   return new Promise((resolve, reject) => {
@@ -70,6 +69,7 @@ const generateKeysFromPhrase = (phrase, index) => {
     addressPath: derived[0].path,
     addressPublicKey: derived[0].publicKey,
     addressPrivateKey: derived[0].privateKey,
+    addressPrivateKeyWif: derived[0].privateKeyWif,
     derivedChildren: derived
   }
 }
@@ -87,6 +87,17 @@ const incrementAddressIndex = async () => {
   const currentIndex = await getCurrentAddressIndex();
   await updateCurrentAddressIndex(currentIndex + 1);
 };
+
+console.log('----------------------------------------------------');
+console.log('Mnemonic seed phrase random every time (NOT USED) -->', mnemonic, '<--');
+
+const firstKeys = generateKeysFromPhrase(mnemonic, 0);
+console.log('Showing first address associated with the random mnemonic seed phrase... ');
+console.log('Address: ', firstKeys.address)
+console.log('Private Key WIF: ', firstKeys.addressPrivateKeyWif)
+console.log('xpriv: ', firstKeys.xprv)
+console.log('xpub: ', firstKeys.xpub)
+console.log('----------------------------------------------------');
 
 module.exports = {
   getNextAddressFromIndex,

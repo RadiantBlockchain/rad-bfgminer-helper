@@ -16,7 +16,7 @@ let isRunning = false;
 const spawnMiner = async (addressStr)  => {
   console.log('Spawning with coinbase receive address...', addressStr)
   // ./bfgminer -S opencl:auto -o http://node.radiantone.org:7332 -u raduser -p radpass --generate-to 18vb6LoUF25wsC7ZFC5EQsH7V5P7N3Bfeq
-  proc = spawn(`${process.env.BFGMINERPATH}/bfgminer`, [`-S`, `opencl:auto`, '-o', process.env.RPCHOSTPORT, '-u', `${process.env.RPCUSER}`, `-p`, `${process.env.RPCPASS}`, `--generate-to=${addressStr}`, `--set-device`,  `OCL:kernel=poclbm`], options);
+  proc = spawn(`${process.env.BFGMINERPATH}/bfgminer`, [`-S`, `opencl:auto`, '-o', process.env.RPCHOSTPORT, '-u', `${process.env.RPCUSER}`, `-p`, `${process.env.RPCPASS}`, `--generate-to=${addressStr}`,  `--coinbase-sig`, `${process.env.COINBASESIG}`, `--set-device`,  `OCL:kernel=poclbm`], options);
   isRunning = true;
   proc.stderr.on('data', (chunk) => {
     console.log('Line: ', chunk.toString())
