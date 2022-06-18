@@ -1,4 +1,4 @@
-# minerscript-js
+# rad-bfgminer-helper
 
 Spawn wrapper around rad-bfgminer to use a seed phrase to incrementally generate new coinbase receive addresses for
 each successful block mined.
